@@ -19,8 +19,8 @@ public class User {
     @NotEmpty(message = "Поле Last Name не может быть пустым")
     @Size(min = 2, max = 30, message = "Поле Last Name должно содержать не меньше 2х и не больше 30 символов")
     private String lastName;
-    @Column (name = "email")
-    @NotEmpty(message = "Поле Email не может быть пустым")
+    @Column (unique = true, name = "email")
+    @Size(min = 1, message = "Поле Email не может быть пустым")
     @Email(message = "Не правильно введен Email")
     private String email;
 

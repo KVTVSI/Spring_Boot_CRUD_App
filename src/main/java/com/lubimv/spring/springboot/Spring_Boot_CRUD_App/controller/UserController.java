@@ -37,33 +37,44 @@ public class UserController {
     @PostMapping
     public String saveUser(@ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+        try {
+            if (bindingResult.hasErrors()) {
+                return "users/new";
+            } else {
+                userService.addUser(user);
+            }
+        } catch (Exception e) {
+            bindingResult.rejectValue("email", "error.user", "Пользователь с таким email уже существует");
             return "users/new";
         }
-        userService.addUser(user);
-
         return "redirect:/users";
     }
 
-    @GetMapping("/{email}/edit")
-    public String editUser(Model model, @PathVariable("email") String email) {
-        model.addAttribute("user", userService.getUser(email));
+    @GetMapping("/{id}/edit")
+    public String editUser(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("user", userService.getUser(id));
         return "users/edit";
     }
 
-    @PatchMapping("/{email}")
-    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
-                             @PathVariable("email") String email) {
-        if (bindingResult.hasErrors()) {
+    @PatchMapping("/{id}")
+    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        try {
+            if (bindingResult.hasErrors()) {
+                return "users/edit";
+            } else {
+                userService.updateUser(user);
+            }
+        } catch (Exception e) {
+            bindingResult.rejectValue("email", "error.user", "Пользователь с таким email уже существует");
             return "users/edit";
         }
-        userService.updateUser(email, user);
+
         return "redirect:/users";
     }
 
-    @DeleteMapping("/{email}")
-    public String delete(@PathVariable("email") String email) {
-        userService.deleteUser(email);
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 }

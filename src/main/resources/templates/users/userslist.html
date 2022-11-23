@@ -70,11 +70,11 @@
             <td th:text="${users.getLastName()}"/>
             <td style="text-align: center">
                 <form style="display: inline" th:method="GET"
-                      th:action="@{/users/{email}/edit(email=${users.getEmail()})}">
+                      th:action="@{/users/{id}/edit(id=${users.getId()})}">
                     <input type="submit" value="Изменить">
                 </form>
                 <form style="display: inline" th:method="DELETE"
-                      th:action="@{users/{email}(email=${users.getEmail()})}">
+                      th:action="@{users/{id}(id=${users.getId()})}">
                     <input type="submit" value="Удалить">
                 </form>
             </td>

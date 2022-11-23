@@ -45,7 +45,7 @@
     </h2>
     <br>
 
-    <form style="display: inline-block" th:method="PATCH" th:action="@{/users/{email}(email=${user.getEmail()})}"
+    <form style="display: inline-block" th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}"
           th:object="${user}">
         <br><br>
         <label for="email"><h1>Email: </h1></label>

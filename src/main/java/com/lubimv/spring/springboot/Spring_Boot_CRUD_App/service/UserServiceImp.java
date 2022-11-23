@@ -20,14 +20,14 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public boolean addUser(User user) {
-        return userDao.addUser(user);
+    public void addUser(User user) {
+        userDao.addUser(user);
     }
 
     @Override
     @Transactional
-    public User getUser(String email) {
-        return userDao.getUser(email);
+    public User getUser(Long id) {
+        return userDao.getUser(id);
     }
 
     @Override
@@ -38,13 +38,13 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(String userEmail, User updatedUser) {
-        userDao.updateUser(userEmail, updatedUser);
+    public void updateUser(User updatedUser) {
+        userDao.updateUser(updatedUser);
     }
 
     @Override
     @Transactional
-    public boolean deleteUser(String email) {
-        return userDao.deleteUser(email);
+    public void deleteUser(Long id) {
+        userDao.deleteUser(id);
     }
 }
